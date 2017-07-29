@@ -1,3 +1,5 @@
+require 'pry'
+
 def second_supply_for_fourth_of_july(holiday_hash)
   # given that holiday_hash looks like this:
   # {
@@ -51,6 +53,11 @@ def all_winter_holiday_supplies(holiday_hash)
     supplies.flatten
 end
 
+
+
+
+
+
 def all_supplies_in_holidays(holiday_hash)
   holiday_hash.each do | season, holiday |
     puts "#{season.capitalize}:"
@@ -61,14 +68,24 @@ def all_supplies_in_holidays(holiday_hash)
   end
 end
 
-def fix_words words
-  words.collect do |word|
-      word.split.collect(&:capitalize).join(" ")
+def fix_words c
+  c.collect do |w|
+    fix_multiword w
   end
+end
+
+def fix_multiword word
+  word.split.collect(&:capitalize).join(" ")
+end
+
+def fix_case word
+  word.gsub("_"," ").split.map(&:capitalize).join(" ")
 end
 
 
 def all_holidays_with_bbq(holiday_hash)
+  # return an array of holiday names (as symbols) where supply lists
+  # include the string "BBQ"
   bbq = []
   holiday_hash.each do |season, holidays|
     holidays.keys.each do |holiday|
